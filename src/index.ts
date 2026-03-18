@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import { createServer } from 'http';
 import { connectDB,connectRedis } from './config';
@@ -21,7 +22,10 @@ const  limiter = rateLimit({
 });
 
 app.use(logRequest);
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use(limiter);
