@@ -9,12 +9,16 @@ import { CustomError } from './types';
 import { initializeSocket } from './socket/socket';
 import { rateLimit } from 'express-rate-limit';
 import './queues/workers';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './swagger';
 
 const app = express();
 const httpServer = createServer(app);
 export const io = initializeSocket(httpServer);
 const PORT: number = Number(process.env.PORT) || 3000;
 app.set('trust proxy', 1);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const  limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 250,
