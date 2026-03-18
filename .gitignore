@@ -1,0 +1,7 @@
+.env
+node_modules
+servers.json
+src/logs/
+src/generated/
+dist
+.github/
