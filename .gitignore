@@ -4,4 +4,4 @@ servers.json
 src/logs/
 src/generated/
 dist
-.github/
+# .github/
